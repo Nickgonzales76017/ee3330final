@@ -1,0 +1,62 @@
+% Convolution_MatlabDEMO.m
+% Matlab DEMOS for the lecture "ConvolutionExamples"
+% richb, February 2014
+
+%---EXAMPLE 1
+%---Convolve a rectangular pulse with itself
+
+% pulse
+x1 = [0 1 0 0 0 ]';
+x2 = [2 1 0 0 0 ]';
+y_a = conv(x1,x2);
+
+x3 = [2 -1 0 0 0 ]';
+x4 = [-1 2 1 0 0 ]';
+y_b = conv(x3,x4);
+
+x5 = [1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0]';
+x6 = [0 0 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1]';
+y_c = conv(x5,x6);
+
+x7 = [1 2 1 1 0 0 0 0 ]';
+x8 = [0 0 1 -1 0 0 1 1 ]';
+y_d = conv(x7,x8);
+
+x9 = [0 0 0 ones(1,100000)]';
+x10 = [1 1 1 1 -2 -2 0 0 0 0 0 0 0]';
+y_2 = conv(x9,x10);
+n10 = 0:length(x10)-1;
+ 
+
+% zero pad x to make the pulse the same length as y for more clear plotting
+x1(length(y_a)) = 0;
+n = 0:length(y_a)-1;
+
+x3(length(y_b)) = 0;
+n2 = 0:length(y_b)-1;
+
+x5(length(y_c)) = 0;
+n3 = 0:length(y_c)-1;
+
+x7(length(y_d)) = 0;
+n4 = 0:length(y_d)-1;
+figure('units','normalized','position',[0 0 1 1.5]);
+% subplot(221)
+% stem(n,x3,'b','Marker','none','LineWidth',2);axis([0 7 -1 1]);
+% title('pulse','fontsize',18)
+
+subplot(231)
+stem(n,y_a,'b','Marker','none','LineWidth',2);
+title('pulse * pulse','fontsize',18)
+subplot(232)
+stem(n2,y_b,'b','Marker','none','LineWidth',2);
+title('pulse * pulse','fontsize',18)
+subplot(233)
+stem(n3,y_c,'b','Marker','none','LineWidth',2);
+title('pulse * pulse','fontsize',18)
+subplot(234)
+stem(n4,y_d,'b','Marker','none','LineWidth',2);
+title('pulse * pulse','fontsize',18)
+subplot(235)
+stem(y_2(1:length(n10)),'b','Marker','none','LineWidth',2);
+title('pulse * pulse','fontsize',18)

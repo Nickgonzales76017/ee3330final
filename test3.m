@@ -1,0 +1,50 @@
+%{
+STEPS TO SOLVE PROB 3 OF REVIEW
+-------------------------------
+1) CONVERT E(y,t) to phasor form using the T2P()
+ or time to phaosr function
+2) this should also tell the propogation direction and variable
+3) h = (1/n)(k)x E
+where n = 120pi and k is prop direction and variable
+/ x cross y is z 
+/ x cross z is y
+/ y cross z is x
+/ y cross x is z
+4) K (wave number, the number before the propogation variable)=2pi/lambda
+5)f = c(which is 3x10^8)/lambda
+
+
+%}
+
+ [r,k] = T2P();
+
+function [A,k] = T2P()
+    i0 = input('Is conversion for cos or sin ([c/s]):', 's');
+    if strcmp(i0,'c')
+        i1 = input('in the format |A|cos(wt+phi), what is A ?:', 's');
+        i3 = input('in the format |A|cos(wt+phi), what is phi ?:', 's');
+        i4 = input('in the format |A|cos(wt+phi), is phi + or - ?[+/-]:', 's');
+        k = input('in the format |A|cos(wt+phi), what variable is asscoaited with phi ?[x/y/z]:', 's');
+        A = [i1, 'e^(j*', i3, ')'];
+        if strcmp(i4,'+')
+            Adisp = [i1, 'e^(j*', i3, ') is your phasor and its in the neg X direction'];
+            disp(Adisp)
+        elseif strcmp(i4,'-')
+            Adisp = [i1, 'e^(j*', i3, ') is your phasor and its in the pos X direction'];
+            disp(Adisp)
+        end
+    elseif strcmp(i0,'s')
+        i1 = input('in the format |A|sin(wt+phi), what is A ?:', 's');
+        i3 = input('in the format |A|sin(wt+phi), what is phi ?:', 's');
+        i4 = input('in the format |A|cos(wt+phi), is phi + or - ?[+/-]:', 's');
+        A = [i1, 'e^(j*', i3, '+ pi/2)'];
+        if strcmp(i4,'+')
+            Adisp = [i1, 'e^(j*', i3, '+ pi/2)  is your phasor and its in the neg X direction'];
+            disp(Adisp)
+        elseif strcmp(i4,'-')
+            Adisp = [i1, 'e^(j*', i3, '+ pi/2)  is your phasor and its in the pos X direction'];
+            disp(Adisp)
+        end
+        disp(A)
+    end
+end
